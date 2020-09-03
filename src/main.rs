@@ -1,9 +1,11 @@
 // main.rs
 // vadersay
 
+extern crate failure;
 extern crate structopt;
 extern crate owo_colors;
 
+use failure::ResultExt;
 use structopt::StructOpt;
 use owo_colors::OwoColorize;
 
@@ -23,21 +25,22 @@ struct Settings {
 }
 
 
-fn main() -> std::io::Result<()> {
+fn main() -> Result<(), failure::Error> {
 
     println!();
 
     let settings = Settings::from_args();
 
     if settings.death_star {
-        println!("{}", &DEATH_STAR_IMAGE.yellow());
+        println!("{}", &DEATH_STAR_IMAGE.bright_yellow());
     } else {
 
         let mut image: String = VADER_IMAGE.to_string();
 
         match &settings.file {
             Some(path) => {
-                image = std::fs::read_to_string(path)?;
+                image = std::fs::read_to_string(path)
+                    .with_context(|_| format!("File not found: {:?}", path))?;
             }
 
             None => {
