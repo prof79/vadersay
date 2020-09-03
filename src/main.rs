@@ -10,7 +10,10 @@ use structopt::StructOpt;
 struct Settings {
 
     #[structopt(default_value = "Inspired by danlogs!")]
-    message: String
+    message: String,
+
+    #[structopt(long, short)]
+    death_star: bool,
 }
 
 
@@ -20,8 +23,12 @@ fn main() {
 
     let settings = Settings::from_args();
 
-    print_message_bubble(&settings.message);
-    println!("{}", &VADER_IMAGE);
+    if settings.death_star {
+        println!("{}", &DEATH_STAR_IMAGE);
+    } else {
+        print_message_bubble(&settings.message);
+        println!("{}", &VADER_IMAGE);
+    }
 }
 
 
