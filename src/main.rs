@@ -3,9 +3,14 @@
 
 fn main() {
 
-    let message = "Hello, world!";
+    //let message = "Hello, world!";
     //let message = "";
     //let message = "!";
+    const DEFAULT_MESSAGE: &'static str = "Inspired by danlogs!";
+
+    let message: &str = &std::env::args()
+        .nth(1)
+        .or(Some(DEFAULT_MESSAGE.to_string())).unwrap();
 
     print_message_bubble(&message);
     println!("{}", &VADER_IMAGE);
