@@ -16,10 +16,14 @@ struct Settings {
 
     #[structopt(long, short)]
     death_star: bool,
+
+    #[structopt(long, short, parse(from_os_str))]
+    /// Use your own ASCII art.
+    file: Option<std::path::PathBuf>,
 }
 
 
-fn main() {
+fn main() -> std::io::Result<()> {
 
     println!();
 
@@ -28,9 +32,24 @@ fn main() {
     if settings.death_star {
         println!("{}", &DEATH_STAR_IMAGE.yellow());
     } else {
+
+        let mut image: String = VADER_IMAGE.to_string();
+
+        match &settings.file {
+            Some(path) => {
+                image = std::fs::read_to_string(path)?;
+            }
+
+            None => {
+                // ignore
+            }
+        }
+
         print_message_bubble(&settings.message);
-        println!("{}", &VADER_IMAGE.bright_blue());
+        println!("{}", &image.bright_blue());
     }
+
+    Ok(())
 }
 
 
