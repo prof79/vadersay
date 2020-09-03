@@ -1,15 +1,26 @@
 // main.rs
 // vadersay
 
+extern crate structopt;
+
+use structopt::StructOpt;
+
+
+#[derive(StructOpt, Debug)]
+struct Settings {
+
+    #[structopt(default_value = "Inspired by danlogs!")]
+    message: String
+}
+
+
 fn main() {
 
-    const DEFAULT_MESSAGE: &'static str = "Inspired by danlogs!";
+    println!();
 
-    let message: &str = &std::env::args()
-        .nth(1)
-        .or(Some(DEFAULT_MESSAGE.to_string())).unwrap();
+    let settings = Settings::from_args();
 
-    print_message_bubble(&message);
+    print_message_bubble(&settings.message);
     println!("{}", &VADER_IMAGE);
 }
 
@@ -26,7 +37,6 @@ fn print_message_bubble(message: &str) {
 
     let length = actual_message.len();
 
-    println!("");
     println!("    {}", "_".repeat(length));
     println!("   /{}\\", " ".repeat(length));
     println!("  | {} |", &actual_message);
