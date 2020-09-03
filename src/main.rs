@@ -6,6 +6,7 @@ extern crate exitfailure;
 extern crate structopt;
 extern crate owo_colors;
 
+use std::io::{self, Read};
 use failure::ResultExt;
 use exitfailure::ExitFailure;
 use structopt::StructOpt;
@@ -13,6 +14,7 @@ use owo_colors::OwoColorize;
 
 
 #[derive(StructOpt, Debug)]
+/// Program settings supplied via command-line.
 struct Settings {
 
     #[structopt(default_value = "Inspired by danlogs!")]
@@ -24,6 +26,10 @@ struct Settings {
     #[structopt(long, short, parse(from_os_str))]
     /// Use your own ASCII art.
     file: Option<std::path::PathBuf>,
+
+    #[structopt(long, short)]
+    /// Read the message from standard input (pipe) instead.
+    stdin: bool,
 }
 
 
@@ -50,7 +56,22 @@ fn main() -> Result<(), ExitFailure> {
             }
         }
 
-        print_message_bubble(&settings.message);
+        let mut actual_message: String = String::default();
+
+        if settings.stdin {
+            io::stdin().read_to_string(&mut actual_message)?;
+            // Trim last character (newline), different OS standards.
+            actual_message =
+                actual_message
+                    .trim_end_matches("\r\n")
+                    .trim_end_matches("\r")
+                    .trim_end_matches("\n")
+                    .to_string();
+        } else {
+            actual_message = settings.message;
+        }
+
+        print_message_bubble(&actual_message);
         println!("{}", &image.bright_blue());
     }
 

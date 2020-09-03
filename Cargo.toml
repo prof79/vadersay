@@ -1,6 +1,6 @@
 [package]
 name = "vadersay"
-version = "0.1.0"
+version = "0.6.0"
 authors = ["prof79 <markus@markusegger.at>"]
 edition = "2018"
 
