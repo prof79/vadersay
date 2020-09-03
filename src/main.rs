@@ -3,9 +3,6 @@
 
 fn main() {
 
-    //let message = "Hello, world!";
-    //let message = "";
-    //let message = "!";
     const DEFAULT_MESSAGE: &'static str = "Inspired by danlogs!";
 
     let message: &str = &std::env::args()
@@ -19,10 +16,10 @@ fn main() {
 
 fn print_message_bubble(message: &str) {
 
-    let mut actual_message: String = String::from(message);
+    let mut actual_message: String = message.to_string();
 
     if message.len() == 0 {
-        actual_message = String::from("...");
+        actual_message = "...".to_string();
     } else if message.len() == 1 {
         actual_message = format!(" {} ", &message);
     }
