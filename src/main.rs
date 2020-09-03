@@ -2,8 +2,10 @@
 // vadersay
 
 extern crate structopt;
+extern crate owo_colors;
 
 use structopt::StructOpt;
+use owo_colors::OwoColorize;
 
 
 #[derive(StructOpt, Debug)]
@@ -24,10 +26,10 @@ fn main() {
     let settings = Settings::from_args();
 
     if settings.death_star {
-        println!("{}", &DEATH_STAR_IMAGE);
+        println!("{}", &DEATH_STAR_IMAGE.yellow());
     } else {
         print_message_bubble(&settings.message);
-        println!("{}", &VADER_IMAGE);
+        println!("{}", &VADER_IMAGE.bright_blue());
     }
 }
 
@@ -52,7 +54,7 @@ fn print_message_bubble(message: &str) {
 
 // Dart Vader ASCII Art
 // https://asciiart.website/index.php?art=movies/star%20wars
-const VADER_IMAGE: &'static str = r#" _________________________________
+const VADER_IMAGE: &'static str = r#" _________________________________ 
 |:::::::::::::;;::::::::::::::::::|
 |:::::::::::´~||~~~``:::::::::::::|
 |::::::::'   .':     o`:::::::::::|
