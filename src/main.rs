@@ -31,17 +31,15 @@ fn print_message_bubble(message: &str) {
 
     if message.len() == 0 {
         actual_message = "...".to_string();
-    } else if message.len() == 1 {
-        actual_message = format!(" {} ", &message);
     }
 
     let length = actual_message.len();
 
-    println!("    {}", "_".repeat(length));
-    println!("   /{}\\", " ".repeat(length));
-    println!("  | {} |", &actual_message);
-    println!("   \\{}/", "_".repeat(length));
-    println!("    {}|/", " ".repeat((length - 2)/4));
+    println!("    {}", "_".repeat(length + 2));
+    println!("   /{}\\", " ".repeat(length + 2));
+    println!("  |  {}  |", &actual_message);
+    println!("   \\{}/", "_".repeat(length + 2));
+    println!("    {}|/", " ".repeat((length)/4));
 }
 
 
