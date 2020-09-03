@@ -2,10 +2,12 @@
 // vadersay
 
 extern crate failure;
+extern crate exitfailure;
 extern crate structopt;
 extern crate owo_colors;
 
 use failure::ResultExt;
+use exitfailure::ExitFailure;
 use structopt::StructOpt;
 use owo_colors::OwoColorize;
 
@@ -25,7 +27,7 @@ struct Settings {
 }
 
 
-fn main() -> Result<(), failure::Error> {
+fn main() -> Result<(), ExitFailure> {
 
     println!();
 
