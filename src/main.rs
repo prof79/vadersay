@@ -14,17 +14,20 @@ use owo_colors::OwoColorize;
 
 
 #[derive(StructOpt, Debug)]
-/// Program settings supplied via command-line.
+/// Say it like Vader!
 struct Settings {
 
     #[structopt(default_value = "Inspired by danlogs!")]
+    /// Message to print.
     message: String,
 
     #[structopt(long, short)]
+    /// Vader is visiting the Emperor aboard the Death Star
+    /// and can't talk right now.
     death_star: bool,
 
     #[structopt(long, short, parse(from_os_str))]
-    /// Use your own ASCII art.
+    /// Use your own ASCII art from a text file.
     file: Option<std::path::PathBuf>,
 
     #[structopt(long, short)]
