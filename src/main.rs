@@ -97,7 +97,7 @@ fn print_message_bubble(message: &str) {
 }
 
 
-// Dart Vader ASCII Art
+// Darth Vader ASCII Art
 // https://asciiart.website/index.php?art=movies/star%20wars
 const VADER_IMAGE: &'static str = r#" _________________________________ 
 |:::::::::::::;;::::::::::::::::::|
