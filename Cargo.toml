@@ -3,7 +3,10 @@ name = "vadersay"
 version = "0.6.2"
 authors = ["prof79 <markus@markusegger.at>"]
 edition = "2018"
-
+description = "Say it like Vader! CLI tool"
+repository = "https://github.com/prof79/vadersay"
+license = "MIT"
+license-file = "LICENSE.txt"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
