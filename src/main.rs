@@ -66,9 +66,7 @@ fn main() -> Result<(), ExitFailure> {
             // Trim last character (newline), different OS standards.
             actual_message =
                 actual_message
-                    .trim_end_matches("\r\n")
-                    .trim_end_matches("\r")
-                    .trim_end_matches("\n")
+                    .trim()
                     .to_string();
         } else {
             actual_message = settings.message;
